@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Show nft contract</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <form action="" method="post" >
+        <h1><B> Show NFT contract </B></h1>
+        <label for="name"> API key </label> <br>
+        <input type="text" id="api" name="api"> </label> <br>
+        <label for="symbole"> EVM chain id </label> <br>
+        <input type="text" id="id" name="id"> </label> <br>
+
+        <input type="submit" value="submit" >
+    </form>
+    {% for s in content : %}
+    <p> {{ s}}</p>
+    {%endfor%}
+    </body>
+</html>
