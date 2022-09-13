@@ -42,5 +42,30 @@ def show_nft():
         # print(r.json()["contracts"])
     return render_template("show_nft.html")
 
+@app.route("/mint_nft",methods=["POST","GET"])
+def mint_nft():
+    if request.method=="POST" :
+        api_key=request.form["api"]
+        evm_id=request.form["evm"]
+        nft_address=request.form["add"]
+        nft_id=request.form["nft_id"]
+        data=request.form["data"]
+        owner=request.form["owner"]
+
+        url = 'https://thentic.tech/api/nfts/mint'
+        headers = {'Content-Type': 'application/json'}
+        data = {'key': api_key,
+        'chain_id': evm_id,
+        "contract":nft_address,
+        "nft_id":nft_id,
+        "nft_data":data,
+        'to': owner}
+
+        r = requests.post(url, json=data, headers=headers)
+        print(r.text)
+        print(r.json()["transaction_url"])
+        webbrowser.open(r.json()["transaction_url"])
+    return render_template("mint_nft.html")
+
 if __name__=="__main__":
     app.run()
