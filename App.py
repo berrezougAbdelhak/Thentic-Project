@@ -66,6 +66,29 @@ def mint_nft():
         print(r.json()["transaction_url"])
         webbrowser.open(r.json()["transaction_url"])
     return render_template("mint_nft.html")
+@app.route("/transfer_nft",methods=["POST","GET"])
+def transfer_nft():
+    if request.method=="POST" :
+        api_key=request.form["api"]
+        nft_address=request.form["add"]
+        nft_id=request.form["nft_id"]
+        evm_id=request.form["evm"]
+        from_add=request.form["from"]
+        to_add=request.form["to"]
 
+        url = 'https://thentic.tech/api/nfts/transfer'
+        headers = {'Content-Type': 'application/json'}
+        data = {'key': api_key,
+        'chain_id': evm_id,
+        "contract":nft_address,
+        "nft_id":nft_id,
+        "from":from_add,
+        'to': to_add}
+
+        r = requests.post(url, json=data, headers=headers)
+        print(r.text)
+        print(r.json()["transaction_url"])
+        webbrowser.open(r.json()["transaction_url"])
+    return render_template("transfer_nft.html")
 if __name__=="__main__":
     app.run()
